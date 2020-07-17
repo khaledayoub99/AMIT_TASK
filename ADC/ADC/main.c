@@ -16,7 +16,7 @@
 int main(void)
 {
 	uint16 temp = 0 ;
-	uint8 pass[4]={1,2,3,4};
+	uint8 pass[4]={'1','2','3','4'};
 	uint8 try[4];
 	uint8 value=0;
     LCD_INIT();
@@ -37,7 +37,7 @@ int main(void)
 		try[i]=value;
 		i++;
 	}
-	if (pass[0]==try[0]&&pass[1]==try[1]&&pass[2]==try[2]&&pass[3]==try[3])
+	if ((pass[0]==try[0])&&(pass[1]==try[1])&&(pass[2]==try[2])&&(pass[3]==try[3]))
 	{
 		LCD_Clear();
 		TempSensor_Read(&temp);

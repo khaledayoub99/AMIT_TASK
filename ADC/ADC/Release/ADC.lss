@@ -851,16 +851,16 @@ Disassembly of section .text:
  6d2:	df 06       	cpc	r13, r31
  6d4:	99 f7       	brne	.-26     	; 0x6bc <main+0x3c>
  6d6:	89 81       	ldd	r24, Y+1	; 0x01
- 6d8:	81 30       	cpi	r24, 0x01	; 1
+ 6d8:	81 33       	cpi	r24, 0x31	; 49
  6da:	99 f4       	brne	.+38     	; 0x702 <main+0x82>
  6dc:	8a 81       	ldd	r24, Y+2	; 0x02
- 6de:	82 30       	cpi	r24, 0x02	; 2
+ 6de:	82 33       	cpi	r24, 0x32	; 50
  6e0:	81 f4       	brne	.+32     	; 0x702 <main+0x82>
  6e2:	8b 81       	ldd	r24, Y+3	; 0x03
- 6e4:	83 30       	cpi	r24, 0x03	; 3
+ 6e4:	83 33       	cpi	r24, 0x33	; 51
  6e6:	69 f4       	brne	.+26     	; 0x702 <main+0x82>
  6e8:	8c 81       	ldd	r24, Y+4	; 0x04
- 6ea:	84 30       	cpi	r24, 0x04	; 4
+ 6ea:	84 33       	cpi	r24, 0x34	; 52
  6ec:	51 f4       	brne	.+20     	; 0x702 <main+0x82>
  6ee:	0e 94 f5 02 	call	0x5ea	; 0x5ea <LCD_Clear>
  6f2:	c6 01       	movw	r24, r12
