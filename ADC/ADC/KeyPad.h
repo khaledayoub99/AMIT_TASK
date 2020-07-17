@@ -6,7 +6,7 @@
 
 void KeyPad_Init(void);
 
-uint8 KeyPad_GetValue(uint8 *value);
+uint8 KeyPad_GetValue(void);
 
 
 

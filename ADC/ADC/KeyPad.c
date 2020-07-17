@@ -34,12 +34,12 @@ void	KeyPad_Init(void)
 
 	
 }
-uint8	KeyPad_GetValue(uint8 *value)
+uint8	KeyPad_GetValue(void)
 {
 	
 	uint8 LOC_Coloum = 0 ;
 	uint8 LOC_Row = 0 ;
-	//uint8 value = 0 ;
+	uint8 value = 0 ;
 	uint8 temp = 0 ;
 	
 	for(LOC_Coloum = COL_INIT ; LOC_Coloum <= COL_FINAL ; LOC_Coloum++)

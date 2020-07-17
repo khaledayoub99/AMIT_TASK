@@ -23,26 +23,34 @@ int main(void)
 	KeyPad_Init();
 	TempSensor_Init();
 	LCD_WrtieString("Password plz");
+	LCD_GoTo(1,0);
 	uint8 i=0;
+	
 	while(i<4)
 	{
 		value=0;
-		while(!KeyPad_GetValue(&value));
+		while(!value)
+		{
+			value=KeyPad_GetValue();
+		}
+		LCD_WrtieChar(value);
 		try[i]=value;
 		i++;
 	}
 	if (pass[0]==try[0]&&pass[1]==try[1]&&pass[2]==try[2]&&pass[3]==try[3])
 	{
-    while (1) 
-    {
 		LCD_Clear();
 		TempSensor_Read(&temp);
 		LCD_WrtieNumber(temp);
-    }
 	}
 	else{
 		LCD_Clear();
 		LCD_WrtieString("Password is wrong");
+	}
+	
+	while(1)
+	{
+		
 	}
 
 }
