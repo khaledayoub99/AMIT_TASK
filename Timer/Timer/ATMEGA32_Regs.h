@@ -18,6 +18,8 @@
 
 
 /************DIO_REGISTER******************/
+
+
 #define PORTA (*(volatile uint8*)(0x3B))
 #define PINA  (*(volatile uint8*)(0x39))
 #define DDRA  (*(volatile uint8*)(0x3A))
@@ -37,6 +39,7 @@
 
 /************DIO_REGISTER******************/
 
+
 #define ADMAX        (*(volatile uint8*) (0x27))
 #define ADCSRA       (*(volatile uint8*) (0x26))
 #define ADCH         (*(volatile uint8*) (0x25))
@@ -48,10 +51,22 @@
 
 /************TIMMER******************/
 
+#define TIMSK	     (*(volatile uint8*) (0x59))
+#define TIFR	     (*(volatile uint8*) (0x58))
+
+/************TIMMER0*****************/
+
 #define TCCR0	     (*(volatile uint8*) (0x53))
 #define TCNT0	     (*(volatile uint8*) (0x52))
 #define OCR0	     (*(volatile uint8*) (0x5C))
-#define TIMSK	     (*(volatile uint8*) (0x59))
-#define TIFR	     (*(volatile uint8*) (0x58))
+
+/************TIMMER1*****************/
+
+#define TCCR1A	     (*(volatile uint8*)  (0x4F))
+#define TCCR1B	     (*(volatile uint8*)  (0x4E))
+#define TCNT1L	     (*(volatile uint16*) (0x4C))
+#define OCR1AL	     (*(volatile uint16*) (0x4A))
+#define ICR1L	     (*(volatile uint16*) (0x46))
+
 
 #endif // ATMEGA32_REG_H

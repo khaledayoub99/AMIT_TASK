@@ -6,20 +6,21 @@
  */ 
 #include "TIMER.h"
 #include "LED.h"
-#include <avr/interrupt.h>
 
-
-extern uint8 Init_Value ;
-extern uint32 Num_OVF ;
 
 
 int main(void)
 {
 	LED0_Init();
-	LED0_ON();
+	Timer0_SetCallBack(LED0_toggle);
 	Timer0_INIT();
 	Timer0_SetDelay(1000);
 	Timer0_Start();
+	
+	/*Timer1_SetCallBack(LED0_toggle);
+	Timer1_INIT();
+	Timer1_SetDelay(1000);
+	Timer1_Start();*/
 	
     while (1) 
     {
@@ -27,17 +28,3 @@ int main(void)
     }
 }
 
-ISR(TIMER0_OVF_vect)
-{
-	static uint32 CT =0; 
-	
-	CT++;
-	
-	if (CT==Num_OVF)
-	{
-		CT = 0 ;
-		TCNT0   = Init_Value;
-		LED0_toggle();
-	}
-	
-}
