@@ -131,6 +131,9 @@ void Timer0_Stop(void)
 
 void Timer0_SetDelay(uint32 delay_Ms)
 {
+	#if TIMER0_MODE==Timer_Normal_Mode
+
+
 	#if		 TIMER0_PRESCALER==Timer_PRESCALER_1
 	
 	uint8  Tick_Time_us =  (1 / 16) ;
@@ -176,12 +179,33 @@ void Timer0_SetDelay(uint32 delay_Ms)
 	TCNT0      = Init_Value;
 	Num_OVF ++ ;
 	
+	
+	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_RIS
 
     #endif
 	
+	
+	#endif
+	
+	#elif TIMER0_MODE==Tmeir_CTC_Mode
+	
+	#if	TIMER0_PRESCALER==Timer_PRESCALER_1
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_8
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_64
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_256
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_1024
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_RIS
+
 	
 	#endif
 	
@@ -215,9 +239,21 @@ ISR(TIMER0_OVF_vect)
 	
 }
 
+ISR(TIMER0_COMP_vect)
+{
+	static uint32 COUNT = 0 ;
+	COUNT ++;
+	if(COUNT == Num_CompMatch){
+		COUNT=0;
+		(*ptr_Timer0)();
+	}
+}
+
 
 /************ TIMER1 ***********/
 
+static uint32 Num1_OVF    = 0 ;
+static uint8  Init1_Value = 0 ;
 uint32 Num_CompMatch = 0 ;
 static void (*ptr_Timer1)(void);
 
@@ -283,7 +319,7 @@ void Timer1_INIT(void)
 	
 	#endif
 	
-	#endif
+	
 }
 
 void Timer1_Start(void)
@@ -344,6 +380,8 @@ void Timer1_Stop(void)
 
 void Timer1_SetDelay(uint32 delay_ms)
 {
+	#if TIMER1_MODE==Timer_CTC_Mode
+	
 	#if		 TIMER0_PRESCALER==Timer_PRESCALER_1
 	
 	if (delay_ms<4000)
@@ -400,11 +438,55 @@ void Timer1_SetDelay(uint32 delay_ms)
 
 	#endif
 	
+	#elif TIMER1_MODE==Timer_Normal_Mode
+	
+	#if		 TIMER0_PRESCALER==Timer_PRESCALER_1
+	
+	
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_8
+	
+	
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_64
+	
+	
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_256
+	
+	
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_1024
+	
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL
+	
+	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_RIS
+
+	#endif
+	
+	#endif
+	
 }
 
 void Timer1_SetCallBack(void(*ptr)(void))
 {
 	ptr_Timer1 =ptr ;
+}
+
+ISR(TIMER1_OVF_vect)
+{
+	static uint32 CT =0;
+	
+	CT++;
+	
+	if (CT==Num1_OVF)
+	{
+		CT = 0 ;
+		TCNT0   = Init1_Value;
+		(*ptr_Timer1)();
+	}
+	
 }
 
 ISR(TIMER1_COMPA_vect)
