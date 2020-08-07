@@ -7,8 +7,9 @@
 
 /************ TIMER0 ***********/
 
-static uint32 Num_OVF    = 0 ;
-static uint8  Init_Value = 0 ;
+static uint32 Num_OVF       = 0 ;
+static uint8  Init_Value    = 0 ;
+static uint32 Num_CompMatch = 0 ;
 static void (*ptr_Timer0)(void);
 
 
@@ -180,32 +181,23 @@ void Timer0_SetDelay(uint32 delay_Ms)
 	Num_OVF ++ ;
 	
 	
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_RIS
-
     #endif
 	
 	
+	
+	#elif TIMER0_MODE==Timer_CTC_Mode
+	//*************************************//
+	            //TASK CTC MODE//
+	//*************************************//
+	#if	 TIMER0_PRESCALER==Timer_PRESCALER_1024
+	
+	uint8  Tick_Time_us =  (1024 / 16) ;
+	uint32 Num_Tick     =  (delay_Ms*1000) / Tick_Time_us  ;
+	Init_Value = 256 - (Num_Tick % 157 ) ;
+	OCR0 =  Init_Value ;
+	Num_CompMatch = (Num_Tick / 157 ) ;
+	
 	#endif
-	
-	#elif TIMER0_MODE==Tmeir_CTC_Mode
-	
-	#if	TIMER0_PRESCALER==Timer_PRESCALER_1
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_8
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_64
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_256
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_1024
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL
-	
-	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_RIS
-
 	
 	#endif
 	
@@ -241,10 +233,13 @@ ISR(TIMER0_OVF_vect)
 
 ISR(TIMER0_COMP_vect)
 {
+	
 	static uint32 COUNT = 0 ;
+	OCR0 = 157 ;
 	COUNT ++;
 	if(COUNT == Num_CompMatch){
 		COUNT=0;
+		OCR0 =  Init_Value ;
 		(*ptr_Timer0)();
 	}
 }
@@ -254,7 +249,7 @@ ISR(TIMER0_COMP_vect)
 
 static uint32 Num1_OVF    = 0 ;
 static uint8  Init1_Value = 0 ;
-uint32 Num_CompMatch = 0 ;
+uint32 Num_CompMatch1 = 0 ;
 static void (*ptr_Timer1)(void);
 
 
@@ -317,6 +312,7 @@ void Timer1_INIT(void)
 	SET_BIT(TCCR1B,4);
 	SET_BIT(TCCR1B,5);
 	
+	#endif
 	#endif
 	
 	
@@ -389,7 +385,7 @@ void Timer1_SetDelay(uint32 delay_ms)
 		uint8  Tick_Time  = 1/16 ;
 		uint32 Num_ticks  = (delay_ms*1000) / Tick_Time ;
 		OCR1A = Num_ticks - 1 ;
-		Num_CompMatch = 1 ;
+		Num_CompMatch1 = 1 ;
 	}
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_8
@@ -399,7 +395,7 @@ void Timer1_SetDelay(uint32 delay_ms)
 		uint8  Tick_Time  = 8/16 ;
 		uint32 Num_ticks  = (delay_ms*1000) / Tick_Time ;
 		OCR1A = Num_ticks - 1 ;
-		Num_CompMatch = 1 ;
+		Num_CompMatch1 = 1 ;
 	}
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_64
@@ -409,7 +405,7 @@ void Timer1_SetDelay(uint32 delay_ms)
 		uint8  Tick_Time  = 64/16 ;
 		uint32 Num_ticks  = (delay_ms*1000) / Tick_Time ;
 		OCR1A = Num_ticks - 1 ;
-		Num_CompMatch = 1 ;
+		Num_CompMatch1 = 1 ;
 	}
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_256
@@ -419,7 +415,7 @@ void Timer1_SetDelay(uint32 delay_ms)
 		uint8  Tick_Time  = 256/16 ;
 		uint32 Num_ticks  = (delay_ms*1000) / Tick_Time ;
 		OCR1A = Num_ticks - 1 ;
-		Num_CompMatch = 1 ;
+		Num_CompMatch1 = 1 ;
 	}
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_1024
@@ -429,7 +425,7 @@ void Timer1_SetDelay(uint32 delay_ms)
 		uint8  Tick_Time  = 1024/16 ;
 		uint32 Num_ticks  = (delay_ms*1000) / Tick_Time ;
 		OCR1A = Num_ticks - 1 ;
-		Num_CompMatch = 1 ;
+		Num_CompMatch1 = 1 ;
 	}
 	
 	#elif	 TIMER0_PRESCALER==Timer_PRESCALER_EXT_FAL

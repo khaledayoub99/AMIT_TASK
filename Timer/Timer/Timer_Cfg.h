@@ -3,7 +3,7 @@
 #ifndef TIMER_CFG_H_
 #define TIMER_CFG_H_
 
-#define TIMER0_MODE		 Timer_Normal_Mode
+#define TIMER0_MODE		 Timer_CTC_Mode
 #define TIMER0_PWM		 Timer_PWM_NON_INVERTED
 
 #define TIMER0_PRESCALER	 Timer_PRESCALER_1024

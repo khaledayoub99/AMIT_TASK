@@ -17,11 +17,6 @@ int main(void)
 	Timer0_SetDelay(1000);
 	Timer0_Start();
 	
-	/*Timer1_SetCallBack(LED0_toggle);
-	Timer1_INIT();
-	Timer1_SetDelay(1000);
-	Timer1_Start();*/
-	
     while (1) 
     {
 		
