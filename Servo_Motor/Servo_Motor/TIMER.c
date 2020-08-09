@@ -513,13 +513,14 @@ void PWM1_Init(void)
 	ICR1= 1250;
 }
 
+
 void PWM1_Gene(uint8 duty_cycle)
 {
 	OCR1A =((duty_cycle*1250)/100)-1 ;
 }
 
 
- void PWM1_Start(void)
+void PWM1_Start(void)
  {
 	 CLR_BIT(TCCR1B,0);
 	 CLR_BIT(TCCR1B,1);

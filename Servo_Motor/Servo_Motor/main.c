@@ -11,8 +11,8 @@
 int main(void)
 {
     Servo_Init();
-	PWM1_Gene(9);
-	PWM1_Start();
+	Servo_SetDegree(80);
+	Servo_Strat();
     while (1) 
     {
     }

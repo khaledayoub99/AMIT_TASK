@@ -6,7 +6,7 @@ TIMER.d TIMER.o: .././TIMER.c .././TIMER.h .././Timer_Cfg.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- F:\atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\include/avr/iom32.h \
+ F:\ATMEL\7.0\Packs\atmel\ATmega_DFP\1.3.300\include/avr/iom32.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
@@ -35,7 +35,7 @@ f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.
 
 f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-F:\atmel\7.0\Packs\atmel\ATmega_DFP\1.3.300\include/avr/iom32.h:
+F:\ATMEL\7.0\Packs\atmel\ATmega_DFP\1.3.300\include/avr/iom32.h:
 
 f:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h:
 
